@@ -12,6 +12,10 @@ function AddTodo({ addTodo }) {
         }
     }
 
+    function changeValue(e) {
+        setValue(e.target.value);
+    }
+
     return (
         <form onSubmit={submitAdd}>
             <div className="input-group mb-4">
@@ -20,7 +24,7 @@ function AddTodo({ addTodo }) {
                     type="text"
                     placeholder="Enter new todo"
                     value={value}
-                    onChange={e => setValue(e.target.value)}
+                    onChange={changeValue}
                 />
                 <div className="input-group-append">
                     <button className="btn btn-primary" type="submit">Add</button>

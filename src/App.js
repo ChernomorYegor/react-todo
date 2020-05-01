@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
+import React, {useState, useEffect} from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import AddTodo from "./AddTodo";
 import TodoList from "./TodoList";
-import TodoContext from "./TodoContext";
 
 function App() {
-    const [todos, setTodos] = useState([
-        { id: 1, text: 'Buy milk' },
-        { id: 2, text: 'Some eggs' },
-        { id: 3, text: 'Go to work' },
-        { id: 4, text: 'reactjsexample.com' }
-    ]);
+    const TODOS = 'TODOS';
+
+    const initTodo = () => JSON.parse(window.localStorage.getItem(TODOS)) || [];
+
+    const [todos, setTodos] = useState(initTodo);
+
+    useEffect( () => window.localStorage.setItem(TODOS, JSON.stringify(todos)));
 
     function addTodo(text) {
         setTodos(todos.concat([{
-            id: Date.now(),
+            id: todos.length + 1,
             text: text
         }]));
     }
@@ -24,12 +24,10 @@ function App() {
     }
 
     return (
-        <TodoContext.Provider value={removeTodo}>
-            <div className="app">
-                <AddTodo addTodo={addTodo} />
-                <TodoList todos={todos} />
-            </div>
-        </TodoContext.Provider>
+        <div className="app">
+            <AddTodo addTodo={addTodo} />
+            <TodoList todos={todos} removeTodo={removeTodo} />
+        </div>
     );
 }
 

@@ -1,9 +1,6 @@
-import React, { useContext} from 'react';
-import 'bootstrap/dist/css/bootstrap.css';
-import TodoContext from "./TodoContext";
+import React from 'react';
 
-function TodoItem({ todo }) {
-    const removeTodo = useContext(TodoContext);
+function TodoItem({ todo, removeTodo }) {
     return (
         <div className="todo-item">
             {todo.text}
