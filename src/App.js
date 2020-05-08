@@ -10,7 +10,7 @@ function App() {
 
     const [todos, setTodos] = useState(initTodo);
 
-    useEffect( () => window.localStorage.setItem(TODOS, JSON.stringify(todos)));
+    useEffect( () => {window.localStorage.setItem(TODOS, JSON.stringify(todos))},[todos]);
 
     function addTodo(text) {
         setTodos(todos.concat([{
